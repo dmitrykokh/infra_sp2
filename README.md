@@ -161,6 +161,27 @@ GET /api/titles/{title_id}/reviews/{review_id}/comments/{comment_id}/ - полу
 
 Подробная документация к API с доступными методами находится по адресу ```http://127.0.0.1:8000/redoc/```
 
+## Запуск проекта:
+
+### Для запуска проекта, применения миграций, создания суперюзера, загрузки статики и добавления в БД данных из фикстур соответственно необходимо в папке infra выполнить команды:
+
+```sh
+docker-compose up -d --build
+sudo docker-compose exec web python manage.py migrate
+sudo docker-compose exec web python manage.py createsuperuser
+sudo docker-compose exec web python manage.py collectstatic --no-input
+sudo docker-compose exec web python manage.py loaddata fixtures.json
+```
+
+После запуска контейнера админка доступна по адресу:
+```sh
+/admin/
+```
+для остановки контейнера необходимо в папке infra выполнить:
+```sh
+ docker-compose down -v
+```
+
 ***
 
 ### Автор
